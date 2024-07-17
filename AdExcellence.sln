@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdExcellence", "AdExcellence\AdExcellence.csproj", "{39A38574-F1A6-4C63-A46E-A15F36F53747}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{39A38574-F1A6-4C63-A46E-A15F36F53747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39A38574-F1A6-4C63-A46E-A15F36F53747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39A38574-F1A6-4C63-A46E-A15F36F53747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39A38574-F1A6-4C63-A46E-A15F36F53747}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C58C9145-C613-4B29-B22C-83B4363FBBBC}
+	EndGlobalSection
+EndGlobal
