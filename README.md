@@ -1,99 +1,84 @@
-# AdExcellence - Advertising Hoarding Management System
+# AdExcellence
 
-AdExcellence is a comprehensive web application designed to streamline the process of managing and booking advertising hoardings. This platform serves three types of users: Admins, Hoarding Owners, and Advertisers, each with tailored features to meet their specific needs.
+A modern web platform for managing and booking advertising hoardings/billboards. Whether you're looking to advertise your business or rent out your advertising spaces, AdExcellence makes the process simple and efficient.
 
-## Features
+![AdExcellence Platform](AdExcellence/images/Hero/Hero_img.jpg)
 
-### For Advertisers
-- Browse available hoardings with detailed information
-- Book hoardings for specific time periods
-- Manage bookings and payments
-- View booking history and status
-- Update profile and preferences
+## What is AdExcellence?
 
-### For Hoarding Owners
-- List and manage hoarding properties
-- Set pricing and availability
-- Track bookings and revenue
-- Manage property details and images
-- View booking requests and history
+AdExcellence connects three key players in the outdoor advertising industry:
+- **Advertisers** who want to promote their business
+- **Hoarding Owners** who have advertising spaces to rent
+- **Administrators** who ensure smooth operations
 
-### For Admins
-- Manage users (Advertisers and Hoarding Owners)
-- Monitor and approve listings
-- Generate reports and analytics
-- Handle user verification
-- System configuration and maintenance
+## Key Features
 
-## Technology Stack
+🏢 **For Businesses Looking to Advertise**
+- Browse available hoardings with location details and pricing
+- Easy booking system
+- Secure online payments
+- Track your advertising campaigns
 
-- **Framework**: ASP.NET Web Forms
-- **Database**: Microsoft SQL Server
-- **Frontend**: HTML5, CSS3, Tailwind CSS
-- **Backend**: C#
-- **Authentication**: Custom user authentication system
-- **Other Tools**: Visual Studio 2022
+🏗️ **For Hoarding/Billboard Owners**
+- List your advertising spaces
+- Manage bookings and availability
+- Track your earnings
+- Upload photos and location details
 
-## Installation Requirements
+## Quick Start Guide
 
-1. **Development Environment**:
-   - Visual Studio 2022 or later
-   - .NET Framework 4.7.2 or later
-   - SQL Server 2019 or later
-   - SQL Server Management Studio (SSMS)
+### To Use the Platform
 
-2. **Database Setup**:
-   - Create a new database named `adexcel`
-   - Restore the database backup file (if provided)
-   - Update the connection string in `Web.config`
+1. Visit our website
+2. Register as either an Advertiser or Hoarding Owner
+3. Complete your profile verification
+4. Start booking or listing hoardings!
 
-3. **Configuration**:
-   ```xml
-   <connectionStrings>
-     <add name="ConnectionString" 
-          connectionString="Data Source=localhost;Initial Catalog=adexcel;Integrated Security=True;TrustServerCertificate=True"
-          providerName="System.Data.SqlClient" />
-   </connectionStrings>
-   ```
+### For Developers
 
-## Running the Application
+Want to run this project locally? Here's how:
 
-1. Clone the repository:
+1. **Prerequisites**
+   - Visual Studio 2022
+   - SQL Server
+   - .NET Framework 4.7.2
+
+2. **Setup Steps**
    ```bash
+   # 1. Clone the repository
    git clone https://github.com/laveshparyani/AdExcellence.git
+
+   # 2. Open in Visual Studio
+   # Open AdExcellence.sln
+
+   # 3. Set up the database
+   # Create a database named 'adexcel' in SQL Server
+
+   # 4. Update connection string in Web.config
+   # Change the connection string to match your SQL Server details
+
+   # 5. Run the application
+   # Press F5 in Visual Studio
    ```
 
-2. Open the solution file `AdExcellence.sln` in Visual Studio
+## Screenshots
 
-3. Build the solution to restore NuGet packages
+Here's what you can expect from our platform:
 
-4. Update the database connection string in `Web.config`
+- Clean, modern interface
+- Mobile-responsive design
+- Easy navigation
+- Secure payment system
 
-5. Run the application using IIS Express from Visual Studio
+## Support
 
-## Project Structure
+Need help? Contact us:
+- 📧 Email: admin@adexcellence.com
+- 💬 Visit our Contact Us page
 
-- `/AdExcellence` - Main project directory
-  - `/App_Code` - Common classes and utilities
-  - `/css` - Stylesheets and Tailwind configuration
-  - `/images` - Image assets
-  - `/bin` - Compiled binaries
-  - `*.aspx` - Web Forms pages
-  - `*.Master` - Master pages for layout
+## Team
 
-## Contributing
+Created by Lavesh Paryani and Kapil
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## Authors
-
-- Lavesh Paryani
-- Kapil
-
-## License
-
-This project is proprietary and confidential. All rights reserved.
+---
+© 2024 AdExcellence. All rights reserved.
