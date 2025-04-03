@@ -73,12 +73,12 @@ Here's what you can expect from our platform:
 ## Support
 
 Need help? Contact us:
-- 📧 Email: admin@adexcellence.com
+- 📧 Email: laveshparyani01@gmail.com / kapillund29@gmail.com
 - 💬 Visit our Contact Us page
 
 ## Team
 
-Created by Lavesh Paryani and Kapil
+Created by Lavesh Paryani and Kapil Lund
 
 ---
 © 2024 AdExcellence. All rights reserved.
