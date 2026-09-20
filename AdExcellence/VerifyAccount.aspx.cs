@@ -48,7 +48,9 @@ namespace AdExcellence
                         connection();
                         try
                         {
-                            da = new SqlDataAdapter("select Password from Login where Email='" + Session["LoginId"] + "'", cn);
+                            SqlCommand pwdCmd = new SqlCommand("select Password from Login where Email=@email", cn);
+                            pwdCmd.Parameters.AddWithValue("@email", Session["LoginId"]);
+                            da = new SqlDataAdapter(pwdCmd);
                             dt = new DataTable();
                             da.Fill(dt);
 
@@ -123,7 +125,9 @@ namespace AdExcellence
                 connection();
                 clear();
 
-                da = new SqlDataAdapter("select * from Login where Email='" + ddlemail.Text + "' and type='howner'", cn);
+                SqlCommand emailCmd = new SqlCommand("select * from Login where Email=@email and type='howner'", cn);
+                emailCmd.Parameters.AddWithValue("@email", ddlemail.Text);
+                da = new SqlDataAdapter(emailCmd);
                 dt = new DataTable();
                 da.Fill(dt);
 
@@ -166,7 +170,8 @@ namespace AdExcellence
                 cn.Open();
                 cmd.Connection = cn;
 
-                cmd.CommandText = "update Login set status='yes' where Email='" + ddlemail.Text + "'";
+                cmd.CommandText = "update Login set status='yes' where Email=@email";
+                cmd.Parameters.AddWithValue("@email", ddlemail.Text);
                 cmd.ExecuteNonQuery();
                 Response.Write("<script>alert('Verification Completed') </script>");
                 cmd = null;
@@ -201,7 +206,8 @@ namespace AdExcellence
                 cn.Open();
                 cmd.Connection = cn;
 
-                cmd.CommandText = "delete from Login where Email='" + ddlemail.Text + "'";
+                cmd.CommandText = "delete from Login where Email=@email";
+                cmd.Parameters.AddWithValue("@email", ddlemail.Text);
                 cmd.ExecuteNonQuery();
                 Response.Write("<script>alert('Verification Completed') </script>");
                 cmd = null;

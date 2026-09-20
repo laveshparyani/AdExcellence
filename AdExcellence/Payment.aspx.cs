@@ -140,11 +140,14 @@
 
 
                     //QUERYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-                    String ss = "select * from booking where hid='" + Session["proid"].ToString() + "' and CONVERT(DATE, fromdate, 105)<='" + DateTime.Now.ToString("yyyy-MM-dd") + "' and CONVERT(DATE, todate, 105)>='" + DateTime.Now.ToString("yyyy-MM-dd") + "' and status='true'";
+                    String ss = "select * from booking where hid=@proid and CONVERT(DATE, fromdate, 105)<=@today and CONVERT(DATE, todate, 105)>=@today and status='true'";
 
 
 
-                    da = new SqlDataAdapter(ss, cn);
+                    SqlCommand chkCmd = new SqlCommand(ss, cn);
+                    chkCmd.Parameters.AddWithValue("@proid", Session["proid"].ToString());
+                    chkCmd.Parameters.AddWithValue("@today", DateTime.Now.ToString("yyyy-MM-dd"));
+                    da = new SqlDataAdapter(chkCmd);
                     dt = new DataTable();
                     da.Fill(dt);
                     if (dt.Rows.Count > 0)
@@ -153,10 +156,19 @@
                     }
                     else
                     {
-                        String str = "insert into payment values(" + Session["count"] + ",'" + Session["bookid"] + "','" + Session["finalamount"] + "','" + DateTime.Today.Date.ToShortDateString() + "','" + DdlMode.Text + "','" + txtn1.Text + txtn2.Text + txtn3.Text + txtn4.Text + "','" + Ddlmonth.Text + "','" + Ddlyear.Text + "','" + Session["LoginId"] + "')";
+                        String str = "insert into payment values(@payid,@bookid,@finalamount,@paydate,@mode,@cardno,@month,@year,@loginid)";
 
                         cmd = new SqlCommand(str, cn);
                         cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@payid", Session["count"]);
+                        cmd.Parameters.AddWithValue("@bookid", Session["bookid"]);
+                        cmd.Parameters.AddWithValue("@finalamount", Session["finalamount"]);
+                        cmd.Parameters.AddWithValue("@paydate", DateTime.Today.Date.ToShortDateString());
+                        cmd.Parameters.AddWithValue("@mode", DdlMode.Text);
+                        cmd.Parameters.AddWithValue("@cardno", txtn1.Text + txtn2.Text + txtn3.Text + txtn4.Text);
+                        cmd.Parameters.AddWithValue("@month", Ddlmonth.Text);
+                        cmd.Parameters.AddWithValue("@year", Ddlyear.Text);
+                        cmd.Parameters.AddWithValue("@loginid", Session["LoginId"]);
                         try
                         {
                             cn.Close();
@@ -166,10 +178,11 @@
                         cmd.Connection = cn;
                         cmd.ExecuteNonQuery();
 
-                        str = "update Booking set status='true' where bookid = '" + Session["bookid"] + "'";
+                        str = "update Booking set status='true' where bookid = @bookid";
 
                         cmd = new SqlCommand(str, cn);
                         cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@bookid", Session["bookid"]);
                         try
                         {
                             cn.Close();

@@ -59,7 +59,9 @@ namespace AdExcellence
 
 
 
-                    da = new SqlDataAdapter("select * from Login where Email='" + txtEmailID.Text + "' and status='yes'", cn);
+                    SqlCommand selCmd = new SqlCommand("select * from Login where Email=@email and status='yes'", cn);
+                    selCmd.Parameters.AddWithValue("@email", txtEmailID.Text);
+                    da = new SqlDataAdapter(selCmd);
                     dt = new DataTable();
                     da.Fill(dt);
 

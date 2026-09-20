@@ -51,7 +51,9 @@ namespace AdExcellence
 
                     try
                     {
-                        da = new SqlDataAdapter("select * from Hoarding where hid='" + product_name + "' ", cn);
+                        SqlCommand prodCmd = new SqlCommand("select * from Hoarding where hid=@hid ", cn);
+                        prodCmd.Parameters.AddWithValue("@hid", product_name);
+                        da = new SqlDataAdapter(prodCmd);
                         dt = new DataTable();
                         da.Fill(dt);
 
@@ -130,11 +132,14 @@ namespace AdExcellence
 
 
                 //QUERYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-                String ss = "select * from booking where hid='" + Session["proid"].ToString() + "' and CONVERT(DATE, fromdate, 105)<='" + DateTime.Now.ToString("yyyy-MM-dd") + "' and CONVERT(DATE, todate, 105)>='" + DateTime.Now.ToString("yyyy-MM-dd") + "' and status='true'";
+                String ss = "select * from booking where hid=@proid and CONVERT(DATE, fromdate, 105)<=@today and CONVERT(DATE, todate, 105)>=@today and status='true'";
 
 
 
-                da = new SqlDataAdapter(ss, cn);
+                SqlCommand chkCmd = new SqlCommand(ss, cn);
+                chkCmd.Parameters.AddWithValue("@proid", Session["proid"].ToString());
+                chkCmd.Parameters.AddWithValue("@today", DateTime.Now.ToString("yyyy-MM-dd"));
+                da = new SqlDataAdapter(chkCmd);
                 dt = new DataTable();
                 da.Fill(dt);
                 if (dt.Rows.Count > 0)
@@ -167,7 +172,13 @@ namespace AdExcellence
                     double tc = (Convert.ToDouble(Session["cost"].ToString())) * (Convert.ToDouble(ddlMonth.Text));
 
 
-                    cmd.CommandText = "insert into booking values('" + count + "','" + Session["proid"].ToString() + "','" + DateTime.Now.Date.ToShortDateString() + "','" + DateTime.Now.Date.AddMonths(Convert.ToInt32(ddlMonth.Text)).ToShortDateString() + "','" + tc + "','" + Session["LoginId"].ToString() + "','false')";
+                    cmd.CommandText = "insert into booking values(@bookid,@proid,@fromdate,@todate,@tc,@loginid,'false')";
+                    cmd.Parameters.AddWithValue("@bookid", count);
+                    cmd.Parameters.AddWithValue("@proid", Session["proid"].ToString());
+                    cmd.Parameters.AddWithValue("@fromdate", DateTime.Now.Date.ToShortDateString());
+                    cmd.Parameters.AddWithValue("@todate", DateTime.Now.Date.AddMonths(Convert.ToInt32(ddlMonth.Text)).ToShortDateString());
+                    cmd.Parameters.AddWithValue("@tc", tc);
+                    cmd.Parameters.AddWithValue("@loginid", Session["LoginId"].ToString());
                     cmd.ExecuteNonQuery();
                     cn.Close();
                     Session["finalamount"] = tc + "";

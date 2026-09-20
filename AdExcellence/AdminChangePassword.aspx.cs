@@ -43,7 +43,9 @@ namespace AdExcellence
                 connection();
                 try
                 {
-                    da = new SqlDataAdapter("select Password from Login where Email='" + Session["LoginId"] + "'", cn);
+                    SqlCommand selCmd = new SqlCommand("select Password from Login where Email=@email", cn);
+                    selCmd.Parameters.AddWithValue("@email", Session["LoginId"]);
+                    da = new SqlDataAdapter(selCmd);
                     dt = new DataTable();
                     da.Fill(dt);
 
@@ -82,14 +84,16 @@ namespace AdExcellence
             if (Page.IsValid == true)
             {
                 passwd = txtOldPass.Text;
-                if (passwd.Equals(Session["pwd"].ToString()))
+                if (SecurityHelper.VerifyPassword(passwd, Session["pwd"].ToString()))
                 {
 
                     cmd = new SqlCommand();
                     cmd.CommandType = CommandType.Text;
                     cn.Open();
                     cmd.Connection = cn;
-                    cmd.CommandText = "update Login set Password='" + txtNewPass.Text + "' where Email='" + Session["LoginId"] + "'";
+                    cmd.CommandText = "update Login set Password=@password where Email=@email";
+                    cmd.Parameters.AddWithValue("@password", SecurityHelper.HashPassword(txtNewPass.Text));
+                    cmd.Parameters.AddWithValue("@email", Session["LoginId"]);
                     cmd.ExecuteNonQuery();
                     Response.Write("<script>alert('Password changed successfully') </script>");
                     cmd = null;

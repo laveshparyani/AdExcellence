@@ -150,7 +150,9 @@ namespace AdExcellence
 
             try
             {
-                da = new SqlDataAdapter("select * from Location where Id=" + i + " ", cn);
+                SqlCommand selCmd = new SqlCommand("select * from Location where Id=@id ", cn);
+                selCmd.Parameters.AddWithValue("@id", i);
+                da = new SqlDataAdapter(selCmd);
                 dt = new DataTable();
                 da.Fill(dt);
                 display();
@@ -215,7 +217,10 @@ namespace AdExcellence
                     cmd.CommandType = CommandType.Text;
                     cn.Open();
                     cmd.Connection = cn;
-                    cmd.CommandText = "insert into Location values(" + Convert.ToInt32(Session["count"].ToString()) + ",'" + txtname.Text + "','" + txtpincode.Text + "')";
+                    cmd.CommandText = "insert into Location values(@id,@name,@pincode)";
+                    cmd.Parameters.AddWithValue("@id", Convert.ToInt32(Session["count"].ToString()));
+                    cmd.Parameters.AddWithValue("@name", txtname.Text);
+                    cmd.Parameters.AddWithValue("@pincode", txtpincode.Text);
                     cmd.ExecuteNonQuery();
                     Response.Write("<script>alert('Saved Successfully') </script>");
                     cmd = null;
@@ -237,7 +242,10 @@ namespace AdExcellence
                     cmd.CommandType = CommandType.Text;
                     cn.Open();
                     cmd.Connection = cn;
-                    cmd.CommandText = "update Location set name='" + txtname.Text + "',pincode='" + txtpincode.Text + "' where Id='" + lblid.Text + "' ";
+                    cmd.CommandText = "update Location set name=@name,pincode=@pincode where Id=@id ";
+                    cmd.Parameters.AddWithValue("@name", txtname.Text);
+                    cmd.Parameters.AddWithValue("@pincode", txtpincode.Text);
+                    cmd.Parameters.AddWithValue("@id", lblid.Text);
                     cmd.ExecuteNonQuery();
                     Response.Write("<script>alert('Updated Successfully') </script>");
                     cmd = null;
@@ -265,7 +273,8 @@ namespace AdExcellence
                 cmd.CommandType = CommandType.Text;
                 cn.Open();
                 cmd.Connection = cn;
-                cmd.CommandText = "Delete from Location where Id='" + lblid.Text + "' ";
+                cmd.CommandText = "Delete from Location where Id=@id ";
+                cmd.Parameters.AddWithValue("@id", lblid.Text);
                 cmd.ExecuteNonQuery();
                 Response.Write("<script>alert('Removed Successfully') </script>");
                 cmd = null;

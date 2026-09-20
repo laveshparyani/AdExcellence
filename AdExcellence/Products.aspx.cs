@@ -56,7 +56,9 @@ namespace AdExcellence
         {
             try
             {
-                da = new SqlDataAdapter("select * from Login where Email='" + Session["LoginId"].ToString() + "'", cn);
+                SqlCommand profCmd = new SqlCommand("select * from Login where Email=@email", cn);
+                profCmd.Parameters.AddWithValue("@email", Session["LoginId"].ToString());
+                da = new SqlDataAdapter(profCmd);
                 dt = new DataTable();
                 da.Fill(dt);
 
@@ -126,7 +128,9 @@ namespace AdExcellence
             {
                 try
                 {
-                    da = new SqlDataAdapter("select * from Hoarding where location='" + ddlLocation.Text + "'", cn);
+                    SqlCommand locCmd = new SqlCommand("select * from Hoarding where location=@location", cn);
+                    locCmd.Parameters.AddWithValue("@location", ddlLocation.Text);
+                    da = new SqlDataAdapter(locCmd);
                     dt = new DataTable();
                     da.Fill(dt);
 

@@ -44,7 +44,9 @@ namespace AdExcellence
         }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            da = new SqlDataAdapter("select Email,Password,type from Login where Email='" + txtemail.Text + "' and Password='" + txtpassword.Text + "' and status='yes'", cn);
+            SqlCommand loginCmd = new SqlCommand("select Email,Password,type from Login where Email=@email and status='yes'", cn);
+            loginCmd.Parameters.AddWithValue("@email", txtemail.Text);
+            da = new SqlDataAdapter(loginCmd);
             dt = new DataTable();
             da.Fill(dt);
 
@@ -59,7 +61,7 @@ namespace AdExcellence
             {
                 String save = "";
                 save = dt.Rows[0]["Password"].ToString();
-                if (save == txtpassword.Text)
+                if (SecurityHelper.VerifyPassword(txtpassword.Text, save))
                 {
                     //Show other page
 

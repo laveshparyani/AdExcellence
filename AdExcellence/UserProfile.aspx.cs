@@ -47,7 +47,9 @@ namespace AdExcellence
                         connection();
                         try
                         {
-                            da = new SqlDataAdapter("select Password from Login where Email='" + Session["LoginId"] + "'", cn);
+                            SqlCommand pwdCmd = new SqlCommand("select Password from Login where Email=@email", cn);
+                            pwdCmd.Parameters.AddWithValue("@email", Session["LoginId"]);
+                            da = new SqlDataAdapter(pwdCmd);
                             dt = new DataTable();
                             da.Fill(dt);
 
@@ -89,8 +91,9 @@ namespace AdExcellence
 
 
                         connection();
-                        String query = "select * from Login where Email='" + Session["LoginId"].ToString() + "' and type='user'";
-                        da = new SqlDataAdapter(query, cn);
+                        SqlCommand profCmd = new SqlCommand("select * from Login where Email=@email and type='user'", cn);
+                        profCmd.Parameters.AddWithValue("@email", Session["LoginId"].ToString());
+                        da = new SqlDataAdapter(profCmd);
                         dt = new DataTable();
                         da.Fill(dt);
 
