@@ -43,6 +43,12 @@
 
             protected void Page_Load(object sender, EventArgs e)
             {
+                // Guard against an expired or missing session (page opened directly or after timeout)
+                if (Session["LoginId"] == null || Session["finalamount"] == null)
+                {
+                    Response.Redirect("Login.aspx");
+                    return;
+                }
 
                 if (!(Page.IsPostBack == true))
                 {

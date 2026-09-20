@@ -83,6 +83,11 @@ namespace AdExcellence
         {
             if (Page.IsValid == true)
             {
+                if (Session["pwd"] == null)
+                {
+                    Response.Redirect("Login.aspx");
+                    return;
+                }
                 passwd = txtOldPass.Text;
                 if (SecurityHelper.VerifyPassword(passwd, Session["pwd"].ToString()))
                 {

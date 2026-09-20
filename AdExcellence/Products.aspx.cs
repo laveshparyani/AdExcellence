@@ -114,7 +114,7 @@ namespace AdExcellence
 
                     count += 1;
 
-                    str = str + "<a href='HoardingSummary.aspx?pname=" + dt.Rows[i]["hid"].ToString() + " ' class='inline-flex flex-col w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl'><img src='" + "images/hoarding/" + dt.Rows[i]["hid"].ToString() + ".jpg" + "' class='h-80 w-72 object-cover rounded-t-xl'/><div class='px-4 py-3 w-72'><p class='text-lg font-bold text-black truncate block capitalize'> " + dt.Rows[i]["description"].ToString() + "</p><div class='flex items-center'><p class='text-lg font-semibold text-black cursor-auto my-3'> Rs." + dt.Rows[i]["cost"].ToString() + "/month</p> <del> <p class='text-sm text-gray-600 cursor-auto ml-2'></p> </del> <div class='ml-auto'> </div> </div> </div> </a>";
+                    str = str + "<a href='HoardingSummary.aspx?pname=" + dt.Rows[i]["hid"].ToString() + " ' class='inline-flex flex-col w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl'><img src='" + "images/hoarding/" + dt.Rows[i]["hid"].ToString() + ".jpg" + "' class='h-80 w-72 object-cover rounded-t-xl'/><div class='px-4 py-3 w-72'><p class='text-lg font-bold text-black truncate block capitalize'> " + Server.HtmlEncode(dt.Rows[i]["description"].ToString()) + "</p><div class='flex items-center'><p class='text-lg font-semibold text-black cursor-auto my-3'> Rs." + Server.HtmlEncode(dt.Rows[i]["cost"].ToString()) + "/month</p> <del> <p class='text-sm text-gray-600 cursor-auto ml-2'></p> </del> <div class='ml-auto'> </div> </div> </div> </a>";
                 }
             }
             catch (Exception)
@@ -144,7 +144,7 @@ namespace AdExcellence
 
                         count += 1;
 
-                    str = str + "<a href='HoardingSummary.aspx?pname=" + dt.Rows[i]["hid"].ToString() + " ' class='inline-flex flex-col w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl'><img src='" + "images/hoarding/" + dt.Rows[i]["hid"].ToString() + ".jpg" + "' class='h-80 w-72 object-cover rounded-t-xl'/><div class='px-4 py-3 w-72'><p class='text-lg font-bold text-black truncate block capitalize'> " + dt.Rows[i]["description"].ToString() + "</p><div class='flex items-center'><p class='text-lg font-semibold text-black cursor-auto my-3'> Rs." + dt.Rows[i]["cost"].ToString() + "/month</p> <del> <p class='text-sm text-gray-600 cursor-auto ml-2'></p> </del> <div class='ml-auto'> </div> </div> </div> </a>";
+                    str = str + "<a href='HoardingSummary.aspx?pname=" + dt.Rows[i]["hid"].ToString() + " ' class='inline-flex flex-col w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl'><img src='" + "images/hoarding/" + dt.Rows[i]["hid"].ToString() + ".jpg" + "' class='h-80 w-72 object-cover rounded-t-xl'/><div class='px-4 py-3 w-72'><p class='text-lg font-bold text-black truncate block capitalize'> " + Server.HtmlEncode(dt.Rows[i]["description"].ToString()) + "</p><div class='flex items-center'><p class='text-lg font-semibold text-black cursor-auto my-3'> Rs." + Server.HtmlEncode(dt.Rows[i]["cost"].ToString()) + "/month</p> <del> <p class='text-sm text-gray-600 cursor-auto ml-2'></p> </del> <div class='ml-auto'> </div> </div> </div> </a>";
                     }
                 }
                 catch (Exception)

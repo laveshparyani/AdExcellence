@@ -43,7 +43,8 @@ namespace AdExcellence
                 connection();
                 if (Request.QueryString["pname"] == null)
                 {
-                    throw new ArgumentException("No parameter specified");
+                    Response.Redirect("Products.aspx");
+                    return;
                 }
                 else
                 {
@@ -62,10 +63,10 @@ namespace AdExcellence
                             Session["proid"] = dt.Rows[0]["hid"].ToString();
                             table = table + "<table broder='1' style='color:black'>";//<tr><td>Hoarding ID:</td><td valign='top'>" + dt.Rows[0]["hid"].ToString() + "<br /></td></tr><tr><td>&nbsp;</td></tr>";
 
-                            table = table + "<tr><td><b>Size:</b></td><td>" + dt.Rows[0]["size"].ToString() + "</td></tr><tr><td>&nbsp;</td></tr>";
-                            table = table + "<tr><td valign='top'><b>Description: </b><br />&nbsp;</td><td>" + dt.Rows[0]["description"].ToString() + "</td></tr><tr><td>&nbsp;</td></tr>";
-                            table = table + "<tr><td><b>Location: </b><br />&nbsp;</td><td>" + dt.Rows[0]["location"].ToString() + "</td></tr><tr><td>&nbsp;</td></tr>";
-                            table = table + "<tr><td><b>Price: </b></td><td>" + dt.Rows[0]["cost"].ToString() + "</td></tr></table>";
+                            table = table + "<tr><td><b>Size:</b></td><td>" + Server.HtmlEncode(dt.Rows[0]["size"].ToString()) + "</td></tr><tr><td>&nbsp;</td></tr>";
+                            table = table + "<tr><td valign='top'><b>Description: </b><br />&nbsp;</td><td>" + Server.HtmlEncode(dt.Rows[0]["description"].ToString()) + "</td></tr><tr><td>&nbsp;</td></tr>";
+                            table = table + "<tr><td><b>Location: </b><br />&nbsp;</td><td>" + Server.HtmlEncode(dt.Rows[0]["location"].ToString()) + "</td></tr><tr><td>&nbsp;</td></tr>";
+                            table = table + "<tr><td><b>Price: </b></td><td>" + Server.HtmlEncode(dt.Rows[0]["cost"].ToString()) + "</td></tr></table>";
 
                             lbltext.Text = table;
 
