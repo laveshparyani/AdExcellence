@@ -143,6 +143,7 @@
     <Content Include="Login.aspx" />
     <Content Include="ForgotPassword.aspx" />
     <Content Include="VerifyAccount.aspx" />
+    <Content Include="Error.aspx" />
     <Content Include="home.aspx" />
     <Content Include="ContactUs.aspx" />
     <Content Include="AboutUs.aspx" />
