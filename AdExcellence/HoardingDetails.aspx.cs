@@ -41,6 +41,13 @@ namespace AdExcellence
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            // This is the hoarding owner's management page: require a logged-in session
+            if (Session["LoginId"] == null)
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
+
             if (!(Page.IsPostBack == true))
             {
                 connection();
@@ -104,9 +111,11 @@ namespace AdExcellence
             {
                 cn.Open();
                 SqlCommand sq = new SqlCommand("select MAX(hid) from Hoarding", cn);
-                SqlDataReader sd = sq.ExecuteReader();
-                sd.Read();
-                Session["count"] = sd[0];
+                using (SqlDataReader sd = sq.ExecuteReader())
+                {
+                    sd.Read();
+                    Session["count"] = sd[0];
+                }
                 Session["count"] = (int)Session["count"] + 1;
             }
             catch { cn.Close(); cn.Open(); Session["count"] = "1"; }
