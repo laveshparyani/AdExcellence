@@ -20,7 +20,6 @@ namespace AdExcellence
 {
     public partial class WebForm4 : System.Web.UI.Page
     {
-        String email;
         SqlDataAdapter da = new SqlDataAdapter();
         DataTable dt = new DataTable();
         SqlCommand cmd = new SqlCommand();
@@ -53,39 +52,17 @@ namespace AdExcellence
             {
                 try
                 {
-
-                    email = txtEmailID.Text;
-
-
-
-
-                    SqlCommand selCmd = new SqlCommand("select * from Login where Email=@email and status='yes'", cn);
+                    // Passwords are stored hashed and must never be disclosed. Show a neutral
+                    // message regardless of whether the email exists (prevents password/hash
+                    // disclosure and account enumeration). A full self-service reset would
+                    // require an email/OTP flow.
+                    SqlCommand selCmd = new SqlCommand("select Email from Login where Email=@email and status='yes'", cn);
                     selCmd.Parameters.AddWithValue("@email", txtEmailID.Text);
                     da = new SqlDataAdapter(selCmd);
                     dt = new DataTable();
                     da.Fill(dt);
 
-                    if (dt.Rows.Count > 0)
-                    {
-                        Session["Email"] = dt.Rows[0]["Email"].ToString();
-                        Session["epwd"] = dt.Rows[0]["password"].ToString();
-                        if (txtEmailID.Text.Equals(Session["Email"].ToString()))
-                        {
-
-                            String pwd = "Your Password: " + Session["epwd"].ToString();
-
-
-                            //Send password
-                            lblpass.Text = pwd;
-
-
-
-
-                        }
-                        else
-                            Response.Write("<script>alert('Email-Id Not Found')</script>");
-
-                    }
+                    lblpass.Text = "If this email is registered, please contact the administrator to reset your password.";
                 }
                 catch (Exception)
                 { }

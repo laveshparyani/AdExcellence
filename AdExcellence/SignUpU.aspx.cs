@@ -67,20 +67,17 @@ namespace AdExcellence
 
         private void autogenerate()
         {
-            int a = 0;
-            getdata();
-            Session["count"] = dt.Rows.Count;
-            if (a.Equals(Session["count"]))
+            // Next id = highest existing numeric id + 1 (collision-safe even after deletes).
+            try
+            {
+                if (cn.State != ConnectionState.Open) cn.Open();
+                SqlCommand idCmd = new SqlCommand("select ISNULL(MAX(TRY_CAST(id AS INT)), 0) + 1 from Login", cn);
+                Session["count"] = (int)idCmd.ExecuteScalar();
+            }
+            catch (Exception)
             {
                 Session["count"] = 1;
             }
-            else
-            {
-                Session["count"] = (int)Session["count"] + 1;
-            }
-
-            da = null;
-            dt = null;
         }
 
         public void clearAll()
