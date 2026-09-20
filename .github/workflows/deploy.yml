@@ -1,0 +1,49 @@
+name: Deploy to MonsterASP.NET
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Build & deploy (Web Deploy)
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
+
+      - name: Inject database password into Web.config
+        shell: pwsh
+        env:
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        run: |
+          $path = "AdExcellence/Web.config"
+          $content = Get-Content $path -Raw
+          $content = $content.Replace("Password=LAVESH;", "Password=$env:DB_PASSWORD;")
+          Set-Content -Path $path -Value $content -NoNewline
+          Write-Host "Connection string password injected."
+
+      - name: Restore NuGet packages
+        run: nuget restore AdExcellence.sln
+
+      - name: Build and deploy via Web Deploy
+        shell: pwsh
+        env:
+          MONSTERASP_PASSWORD: ${{ secrets.MONSTERASP_PASSWORD }}
+        run: |
+          msbuild AdExcellence/AdExcellence.csproj `
+            /p:Configuration=Release `
+            /p:DeployOnBuild=true `
+            /p:PublishProfile=site92695-WebDeploy `
+            /p:Password="$env:MONSTERASP_PASSWORD" `
+            /p:AllowUntrustedCertificate=true `
+            /p:LaunchSiteAfterPublish=false `
+            /p:UseSharedCompilation=false
