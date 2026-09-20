@@ -84,6 +84,11 @@ Need help? Contact us:
 - **Frontend:** HTML, CSS
 - **IDE:** Visual Studio 2022
 
+## Deployment
+
+Live at **http://adexcellence.runasp.net/** (MonsterASP.NET). Auto-deploys from `main`
+via GitHub Actions. See [HOSTING.md](HOSTING.md) for the full setup, CI/CD, and gotchas.
+
 ## Security
 
 This project was built as an academic exercise. If you plan to deploy it publicly,
