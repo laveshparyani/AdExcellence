@@ -167,6 +167,7 @@
     <Content Include="PaymentSuccessful.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Code\SecurityHelper.cs" />
     <Compile Include="Admin.Master.cs">
       <DependentUpon>Admin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

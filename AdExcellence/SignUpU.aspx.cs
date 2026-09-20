@@ -168,7 +168,9 @@ namespace AdExcellence
             }
 
 
-            da = new SqlDataAdapter("select * from Login where Email='" + txtemail.Text + "'", cn);
+            SqlCommand chkCmd = new SqlCommand("select * from Login where Email=@email", cn);
+            chkCmd.Parameters.AddWithValue("@email", txtemail.Text);
+            da = new SqlDataAdapter(chkCmd);
             dt = new DataTable();
             da.Fill(dt);
             if (dt.Rows.Count == 0)
@@ -178,7 +180,16 @@ namespace AdExcellence
                 cn.Open();
                 cmd.Connection = cn;
 
-                cmd.CommandText = "insert into Login values('" + lblid.Text + "','" + txtname.Text + "','" + txtemail.Text + "','" + txtMobile.Text + "','" + txtadd.Text + "','" + txtcity.Text + "','" + txtState.Text + "','" + txtLandmark.Text + "','" + txtMobile.Text + "','user','yes')";
+                cmd.CommandText = "insert into Login values(@id,@name,@email,@mobile,@address,@city,@state,@landmark,@password,'user','yes')";
+                cmd.Parameters.AddWithValue("@id", lblid.Text);
+                cmd.Parameters.AddWithValue("@name", txtname.Text);
+                cmd.Parameters.AddWithValue("@email", txtemail.Text);
+                cmd.Parameters.AddWithValue("@mobile", txtMobile.Text);
+                cmd.Parameters.AddWithValue("@address", txtadd.Text);
+                cmd.Parameters.AddWithValue("@city", txtcity.Text);
+                cmd.Parameters.AddWithValue("@state", txtState.Text);
+                cmd.Parameters.AddWithValue("@landmark", txtLandmark.Text);
+                cmd.Parameters.AddWithValue("@password", SecurityHelper.HashPassword(txtMobile.Text));
                 cmd.ExecuteNonQuery();
                 Response.Write("<script>alert('Registration Done!!!!') </script>");
                 cmd = null;

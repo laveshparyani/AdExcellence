@@ -173,8 +173,9 @@ namespace AdExcellence
 
         public void gridfill()
         {
-            String sqlq = "select hid[Id],size[Size],location[Location],cost[Price] from Hoarding where emailid='"+ Session["LoginId"].ToString() +"' order by hid desc";
-            da = new SqlDataAdapter(sqlq, cn);
+            SqlCommand gridCmd = new SqlCommand("select hid[Id],size[Size],location[Location],cost[Price] from Hoarding where emailid=@email order by hid desc", cn);
+            gridCmd.Parameters.AddWithValue("@email", Session["LoginId"].ToString());
+            da = new SqlDataAdapter(gridCmd);
             dt = new DataTable();
             da.Fill(dt);
             GridView1.DataSource = dt;
@@ -188,7 +189,9 @@ namespace AdExcellence
 
             try
             {
-                da = new SqlDataAdapter("select * from Hoarding where hid=" + i + " ", cn);
+                SqlCommand selCmd = new SqlCommand("select * from Hoarding where hid=@hid ", cn);
+                selCmd.Parameters.AddWithValue("@hid", i);
+                da = new SqlDataAdapter(selCmd);
                 dt = new DataTable();
                 da.Fill(dt);
                 display();
@@ -248,7 +251,13 @@ namespace AdExcellence
                     cmd.CommandType = CommandType.Text;
                     cn.Open();
                     cmd.Connection = cn;
-                    cmd.CommandText = "insert into Hoarding values(" + Convert.ToInt32(Session["count"].ToString()) + ",'" + txtsize.Text + "','" + DdlLocation.Text + "','" + txtcost.Text + "','" + txtsummary.Text + "','" + Session["loginId"].ToString() + "')";
+                    cmd.CommandText = "insert into Hoarding values(@hid,@size,@location,@cost,@description,@emailid)";
+                    cmd.Parameters.AddWithValue("@hid", Convert.ToInt32(Session["count"].ToString()));
+                    cmd.Parameters.AddWithValue("@size", txtsize.Text);
+                    cmd.Parameters.AddWithValue("@location", DdlLocation.Text);
+                    cmd.Parameters.AddWithValue("@cost", txtcost.Text);
+                    cmd.Parameters.AddWithValue("@description", txtsummary.Text);
+                    cmd.Parameters.AddWithValue("@emailid", Session["loginId"].ToString());
                     cmd.ExecuteNonQuery();
                     Response.Write("<script>alert('Saved Successfully') </script>");
                     cmd = null;
@@ -278,7 +287,8 @@ namespace AdExcellence
                 cmd.CommandType = CommandType.Text;
                 cn.Open();
                 cmd.Connection = cn;
-                cmd.CommandText = "Delete from Hoarding where hid='" + lblid.Text + "' ";
+                cmd.CommandText = "Delete from Hoarding where hid=@hid ";
+                cmd.Parameters.AddWithValue("@hid", lblid.Text);
                 cmd.ExecuteNonQuery();
                 Response.Write("<script>alert('Removed Successfully') </script>");
                 cmd = null;
