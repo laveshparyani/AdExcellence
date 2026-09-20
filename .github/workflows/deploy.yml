@@ -20,16 +20,20 @@ jobs:
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v2
 
-      - name: Inject database password into Web.config
+      - name: Inject secrets into Web.config
         shell: pwsh
         env:
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          MK_VALIDATION: ${{ secrets.MACHINEKEY_VALIDATION }}
+          MK_DECRYPTION: ${{ secrets.MACHINEKEY_DECRYPTION }}
         run: |
           $path = "AdExcellence/Web.config"
           $content = Get-Content $path -Raw
           $content = $content.Replace("Password=LAVESH;", "Password=$env:DB_PASSWORD;")
+          $content = $content.Replace("__MACHINEKEY_VALIDATION__", $env:MK_VALIDATION)
+          $content = $content.Replace("__MACHINEKEY_DECRYPTION__", $env:MK_DECRYPTION)
           Set-Content -Path $path -Value $content -NoNewline
-          Write-Host "Connection string password injected."
+          Write-Host "Secrets injected into Web.config."
 
       - name: Restore NuGet packages
         run: nuget restore AdExcellence.sln
