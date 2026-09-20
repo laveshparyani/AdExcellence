@@ -139,7 +139,7 @@ namespace AdExcellence
                 cn.Open();
                 cmd.Connection = cn;
 
-                cmd.CommandText = "insert into Login values(@id,@name,@email,@mobile,@address,@city,@state,@landmark,@password,'howner','no')";
+                cmd.CommandText = "insert into Login (id, name, Email, Password, address, city, state, landmark, mobile, type, status) values (@id, @name, @email, @password, @address, @city, @state, @landmark, @mobile, 'howner', 'no')";
                 cmd.Parameters.AddWithValue("@id", lblid.Text);
                 cmd.Parameters.AddWithValue("@name", txtname.Text);
                 cmd.Parameters.AddWithValue("@email", txtemail.Text);
