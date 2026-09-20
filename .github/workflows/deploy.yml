@@ -39,11 +39,16 @@ jobs:
         env:
           MONSTERASP_PASSWORD: ${{ secrets.MONSTERASP_PASSWORD }}
         run: |
-          msbuild AdExcellence/AdExcellence.csproj `
-            /p:Configuration=Release `
-            /p:DeployOnBuild=true `
-            /p:PublishProfile=site92695-WebDeploy `
-            /p:Password="$env:MONSTERASP_PASSWORD" `
-            /p:AllowUntrustedCertificate=true `
-            /p:LaunchSiteAfterPublish=false `
-            /p:UseSharedCompilation=false
+          # Pass args as an array so the password is a single token regardless of special characters
+          $msbuildArgs = @(
+            "AdExcellence/AdExcellence.csproj",
+            "/p:Configuration=Release",
+            "/p:DeployOnBuild=true",
+            "/p:PublishProfile=site92695-WebDeploy",
+            "/p:Password=$($env:MONSTERASP_PASSWORD)",
+            "/p:UserName=site92695",
+            "/p:AllowUntrustedCertificate=true",
+            "/p:LaunchSiteAfterPublish=false",
+            "/p:UseSharedCompilation=false"
+          )
+          & msbuild @msbuildArgs
