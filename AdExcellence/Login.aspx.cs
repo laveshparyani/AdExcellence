@@ -31,7 +31,7 @@ namespace AdExcellence
                 cn.Close();
                 cn.Open();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Response.Write("<script>alert('Error in connection')<'/'script>");
             }

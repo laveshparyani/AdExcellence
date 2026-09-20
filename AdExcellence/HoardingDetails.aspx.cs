@@ -23,7 +23,6 @@ namespace AdExcellence
         SqlDataAdapter da = new SqlDataAdapter();
         DataTable dt = new DataTable();
         SqlCommand cmd = new SqlCommand();
-        int count = 0;
         String i;
 
         SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
@@ -34,9 +33,9 @@ namespace AdExcellence
                 cn.Close();
                 cn.Open();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Response.Write("<script>alert('" + ex.ToString() + "')</script>");
+                Response.Write("<script>alert('An error occurred. Please try again.')</script>");
 
             }
         }
@@ -201,7 +200,7 @@ namespace AdExcellence
                 btnRemove.Enabled = true;
                 btnCancel.Enabled = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -232,19 +231,19 @@ namespace AdExcellence
 
                 if (t.Equals(Session["save_code"].ToString()))
                 {
-                    string image;
-                    image = FileUpload1.FileName;
-                    FileUpload1.SaveAs(Server.MapPath("~") + "/images/hoarding/" + lblid.Text + ".jpg");
                     if (FileUpload1.HasFile)
                     {
                         try
                         {
-                            //a_pic.ImageUrl = FileUpload1.PostedFile.FileName
+                            string dir = Server.MapPath("~/images/hoarding/");
+                            if (!System.IO.Directory.Exists(dir))
+                                System.IO.Directory.CreateDirectory(dir);
+                            FileUpload1.SaveAs(dir + lblid.Text + ".jpg");
                             Image1.ImageUrl = "~/images/hoarding/" + lblid.Text + ".jpg";
                         }
-
-                        catch (Exception ex) { }
-
+                        catch (Exception)
+                        {
+                        }
                     }
                     //code for new record
                     cmd = new SqlCommand();

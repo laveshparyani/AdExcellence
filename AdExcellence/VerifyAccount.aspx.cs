@@ -31,9 +31,9 @@ namespace AdExcellence
                 cn.Close();
                 cn.Open();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Response.Write("<script>alert(" + ex.ToString() + ")</script>");
+                Response.Write("<script>alert('An error occurred. Please try again.')</script>");
 
             }
         }
@@ -62,7 +62,7 @@ namespace AdExcellence
                             {
                             }
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                         }
                     }
@@ -77,7 +77,7 @@ namespace AdExcellence
                     Response.Redirect("404.aspx");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Response.Redirect("404.aspx");
             }
@@ -153,7 +153,7 @@ namespace AdExcellence
             }
 
 
-            catch (Exception ex)
+            catch (Exception)
             {
                 Response.Redirect("404.aspx");
             }

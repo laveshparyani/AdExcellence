@@ -16,7 +16,7 @@ namespace AdExcellence
 {
     public partial class WebForm14 : System.Web.UI.Page
     {
-        String pwd, passwd;
+        String passwd;
         SqlDataAdapter da = new SqlDataAdapter();
         DataTable dt = new DataTable();
         SqlCommand cmd = new SqlCommand();
@@ -29,9 +29,9 @@ namespace AdExcellence
                 cn.Close();
                 cn.Open();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Response.Write("<script>alert(" + ex.ToString() + ")</script>");
+                Response.Write("<script>alert('An error occurred. Please try again.')</script>");
 
             }
         }
@@ -57,7 +57,7 @@ namespace AdExcellence
                     {
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                 }
             }

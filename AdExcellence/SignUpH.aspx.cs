@@ -24,8 +24,6 @@ namespace AdExcellence
         SqlDataAdapter da = new SqlDataAdapter();
         DataTable dt = new DataTable();
         SqlCommand cmd = new SqlCommand();
-        int count = 0;
-        String i;
 
         SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
         public void connection()
@@ -35,9 +33,9 @@ namespace AdExcellence
                 cn.Close();
                 cn.Open();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Response.Write("<script>alert('" + ex.ToString() + "')</script>");
+                Response.Write("<script>alert('An error occurred. Please try again.')</script>");
 
             }
         }
@@ -105,7 +103,6 @@ namespace AdExcellence
         {
             if (Page.IsValid == true)
             {
-                String t = "true";
                 //image
 
                 //code for new record
@@ -117,19 +114,19 @@ namespace AdExcellence
         }
         public void checkit()
         {
-            string image;
-            image = FileUpload1.FileName;
-            FileUpload1.SaveAs(Server.MapPath("~") + "/images/aadhar/" + lblid.Text + ".jpg");
             if (FileUpload1.HasFile)
             {
                 try
                 {
-                    //a_pic.ImageUrl = FileUpload1.PostedFile.FileName
+                    string dir = Server.MapPath("~/images/aadhar/");
+                    if (!System.IO.Directory.Exists(dir))
+                        System.IO.Directory.CreateDirectory(dir);
+                    FileUpload1.SaveAs(dir + lblid.Text + ".jpg");
                     Image1.ImageUrl = "~/images/aadhar/" + lblid.Text + ".jpg";
                 }
-
-                catch (Exception ex) { }
-
+                catch (Exception)
+                {
+                }
             }
 
 
@@ -173,35 +170,6 @@ namespace AdExcellence
         {
             clearAll();
         }
-        public void verification_code(String sender, String pass, String tos, String subject, String message)
-        {
-            try
-            {
-                NetworkCredential loginInfo = new NetworkCredential();
-                loginInfo = new NetworkCredential(sender, pass);
-                MailMessage msg = new MailMessage();
-                msg = new MailMessage();
-                msg.From = new MailAddress(sender);
-                msg.To.Add(new MailAddress(tos));
-                msg.Subject = subject;
-                msg.Body = message;
-                msg.IsBodyHtml = true;
-                SmtpClient client = new SmtpClient();
-                client = new SmtpClient("smtp.gmail.com");
-                client.Port = 587;
-                client.EnableSsl = true;
-
-                client.UseDefaultCredentials = false;
-                client.Credentials = loginInfo;
-                client.Send(msg);
-
-            }
-            catch (Exception ex)
-            {
-                Response.Write("<script>alert('Email Not Sent !!!')</script>");
-            }
-        }
-
         protected void txtadd_TextChanged(object sender, EventArgs e)
         {
 

@@ -33,9 +33,9 @@
                     cn.Close();
                     cn.Open();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    Response.Write("<script>alert('" + ex.ToString() + "')</script>");
+                    Response.Write("<script>alert('An error occurred. Please try again.')</script>");
                
                 }
             }
@@ -174,7 +174,7 @@
                             cn.Close();
                             cn.Open();
                         }
-                        catch (Exception ex) { }
+                        catch (Exception) { }
                         cmd.Connection = cn;
                         cmd.ExecuteNonQuery();
 
@@ -188,14 +188,14 @@
                             cn.Close();
                             cn.Open();
                         }
-                        catch (Exception ex) { }
+                        catch (Exception) { }
                         cmd.Connection = cn;
                         cmd.ExecuteNonQuery();
 
                         Response.Redirect("PaymentSuccessful.aspx");
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 { }
             }
         }

@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/BeforeLogin.Master" AutoEventWireup="true" CodeBehind="SignUpH.aspx.cs" Inherits="AdExcellence.WebForm1" %>
-<%@ Register assembly="EO.Web" namespace="EO.Web" tagprefix="eo" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <style type="text/css">
         .style1

@@ -22,7 +22,6 @@ namespace AdExcellence
         SqlDataAdapter da = new SqlDataAdapter();
         DataTable dt = new DataTable();
         SqlCommand cmd = new SqlCommand();
-        int count = 0;
         String i;
 
         SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
@@ -33,9 +32,9 @@ namespace AdExcellence
                 cn.Close();
                 cn.Open();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Response.Write("<script>alert('" + ex.ToString() + "')</script>");
+                Response.Write("<script>alert('An error occurred. Please try again.')</script>");
 
             }
         }
@@ -78,7 +77,6 @@ namespace AdExcellence
         {
             try
             {
-                int a = 0;
                 da = new SqlDataAdapter("select max(Id) from Location", cn);
                 dt = new DataTable();
                 da.Fill(dt);
@@ -162,7 +160,7 @@ namespace AdExcellence
                 btnRemove.Enabled = true;
                 btnCancel.Enabled = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
