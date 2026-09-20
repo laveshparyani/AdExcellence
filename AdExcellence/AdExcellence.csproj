@@ -75,8 +75,6 @@
     <Content Include="HoardingReport.aspx" />
     <Content Include="BookingReport.aspx" />
     <Content Include="images\11.png" />
-    <Content Include="images\aadhar\2.jpg" />
-    <Content Include="images\aadhar\3.jpg" />
     <Content Include="images\blank.gif" />
     <Content Include="images\body-rept.jpg" />
     <Content Include="images\bullet.gif" />
@@ -139,7 +137,6 @@
     <Content Include="images\submit-hi.png" />
     <Content Include="images\submit.png" />
     <Content Include="images\submit1.jpg" />
-    <Content Include="images\top-rept.jpg" />
     <Content Include="images\trans.png" />
     <Content Include="HOwnerReport.aspx" />
     <Content Include="UserReport.aspx" />
@@ -387,6 +384,7 @@
     <Content Include="HOwner.Master" />
     <Content Include="MasterUser.Master" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\site92695-WebDeploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
