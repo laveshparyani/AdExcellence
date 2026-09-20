@@ -76,6 +76,24 @@ Need help? Contact us:
 - 📧 Email: laveshparyani01@gmail.com / kapillund29@gmail.com
 - 💬 Visit our Contact Us page
 
+## Tech Stack
+
+- **Framework:** ASP.NET Web Forms (.NET Framework 4.7.2)
+- **Language:** C#
+- **Database:** Microsoft SQL Server
+- **Frontend:** HTML, CSS
+- **IDE:** Visual Studio 2022
+
+## Security
+
+This project was built as an academic exercise. If you plan to deploy it publicly,
+please review [SECURITY.md](SECURITY.md) first - it lists the hardening steps
+(parameterized queries, password hashing, etc.) to apply before going live.
+
+## License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
 ## Team
 
 Created by Lavesh Paryani and Kapil Lund

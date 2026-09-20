@@ -159,12 +159,10 @@
     <Content Include="AdminChangePassword.aspx" />
     <Content Include="HChangePassword.aspx" />
     <Content Include="HoardingDetails.aspx" />
-    <Content Include="WebForm16.aspx" />
     <Content Include="UserProfile.aspx" />
     <Content Include="Products.aspx" />
     <Content Include="HoardingSummary.aspx" />
     <Content Include="Payment.aspx" />
-    <Content Include="WebForm21.aspx" />
     <Content Include="Reports.aspx" />
     <Content Include="PaymentSuccessful.aspx" />
   </ItemGroup>
@@ -330,13 +328,6 @@
     <Compile Include="HoardingDetails.aspx.designer.cs">
       <DependentUpon>HoardingDetails.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebForm16.aspx.cs">
-      <DependentUpon>WebForm16.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm16.aspx.designer.cs">
-      <DependentUpon>WebForm16.aspx</DependentUpon>
-    </Compile>
     <Compile Include="UserProfile.aspx.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -364,13 +355,6 @@
     </Compile>
     <Compile Include="Payment.aspx.designer.cs">
       <DependentUpon>Payment.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm21.aspx.cs">
-      <DependentUpon>WebForm21.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm21.aspx.designer.cs">
-      <DependentUpon>WebForm21.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports.aspx.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
